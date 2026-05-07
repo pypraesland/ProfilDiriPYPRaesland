@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prahoro Yudo Purwono - Portfolio</title>
+    <title>Prahoro Yudo Purwono - Professional HR Portfolio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,345 +16,300 @@
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 3cm; /* Margin pasti 3cm di semua sisi */
+                margin: 2.5cm;
             }
             body {
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important;
                 background-color: white !important;
-                font-size: 11pt; /* Standar ukuran font baca dokumen */
+                font-size: 11pt; 
             }
-            /* Memastikan card tidak terpotong di tengah halaman saat print */
             .print-break-avoid {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
-            /* Menyembunyikan elemen yang tidak perlu saat print */
             .print-hide {
                 display: none !important;
             }
-
-            /* UKURAN PAKSA GAMBAR SAAT DICETAK AGAR TIDAK RAKSASA */
-            #main-photo-container {
-                width: 140px !important;
-                height: 180px !important;
-                border-radius: 1rem !important;
-                border-width: 2px !important;
-                box-shadow: none !important;
-            }
-            [id^="job-photo-container"] {
-                width: 100px !important;
-                height: 133px !important; /* Proporsi 3:4 portrait */
-                border-radius: 0.75rem !important;
-                border-width: 2px !important;
-                box-shadow: none !important;
-            }
-            /* Menghapus bayangan tebal agar bersih di kertas */
             .print-no-shadow { box-shadow: none !important; }
             .print-border { border: 1px solid #cbd5e1 !important; }
+            .print-bg-white { background: white !important; }
+            .print-text-dark { color: #1e293b !important; }
         }
     </style>
 </head>
-<body class="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-pink-200 selection:text-pink-900">
+<body class="min-h-screen bg-slate-100 font-sans text-slate-800 selection:bg-blue-500 selection:text-white overflow-x-hidden">
 
-    <div id="portfolio-content" class="bg-slate-50 relative pb-10 print:pb-0 print:bg-white">
+    <div id="portfolio-content" class="bg-slate-100 relative pb-10 print:pb-0 print:bg-white overflow-hidden">
+        
+        <!-- MASCULINE & PROFESSIONAL BACKGROUND -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none print-hide z-0">
+            <!-- Modern geometric/gradient lines instead of soft blobs -->
+            <div class="absolute top-[-10%] left-[-5%] w-[800px] h-[800px] bg-blue-900/5 rounded-full blur-[100px]"></div>
+            <div class="absolute top-[30%] right-[-10%] w-[600px] h-[600px] bg-cyan-600/5 rounded-full blur-[120px]"></div>
+            <!-- Grid pattern for structured feel -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNjYmQ1ZTEiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')] opacity-[0.15] mix-blend-multiply"></div>
+        </div>
+
         <!-- 1. HERO PRESENTATION SECTION -->
-        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 py-20 bg-white print:min-h-0 print:py-0 print:overflow-visible">
-            <!-- Cheerful Abstract Backgrounds -->
-            <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none print-hide">
-                <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-pink-300/30 rounded-full blur-[100px]"></div>
-                <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-300/30 rounded-full blur-[120px]"></div>
-                <div class="absolute top-[20%] right-[10%] w-[300px] h-[300px] bg-yellow-300/30 rounded-full blur-[80px]"></div>
-            </div>
+        <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 py-20 print:min-h-0 print:py-0 print:overflow-visible z-10">
             
-            <div class="max-w-6xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center print:flex print:flex-row print:justify-between print:gap-6 print:items-center">
+            <div class="max-w-5xl mx-auto w-full text-center relative">
                 
-                <!-- Profile Photo Upload -->
-                <div class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 print:w-[140px] print:shrink-0 print:order-1 print:justify-start">
-                    <div class="relative group">
-                        <div class="absolute -inset-2 bg-gradient-to-r from-pink-400 via-orange-300 to-yellow-400 rounded-[2.5rem] blur-lg opacity-60 group-hover:opacity-100 transition duration-500 print-hide"></div>
-                        
-                        <!-- Image Container -->
-                        <div id="main-photo-container" class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-[2rem] overflow-hidden bg-white border-4 border-dashed border-slate-300 shadow-2xl flex items-center justify-center print:border-solid print:border-slate-300">
-                            <!-- Placeholder -->
-                            <div class="text-center text-slate-400 print-hide">
-                                <i data-lucide="camera" class="w-12 h-12 mx-auto mb-3 opacity-60 text-pink-400"></i>
-                                <span class="font-bold text-sm tracking-widest uppercase text-slate-500">Upload Portrait</span>
-                            </div>
-                        </div>
-
-                        <!-- Upload Overlay -->
-                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide rounded-[2rem]">
-                            <input type="file" accept="image/*" class="hidden" id="main-photo-input" />
-                            <div class="p-4 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                                <i data-lucide="upload" class="w-6 h-6"></i>
-                            </div>
-                            <span class="text-slate-800 font-bold text-lg">Change Photo</span>
-                        </label>
-                    </div>
+                <!-- Floating Decorative Icons (Professional/HR Theme) -->
+                <div class="absolute -top-12 -left-4 md:-left-12 p-4 bg-slate-800 rounded-2xl shadow-xl shadow-slate-300/50 transform -rotate-6 animate-pulse print-hide hidden md:block border border-slate-700">
+                    <i data-lucide="users" class="w-10 h-10 text-cyan-400"></i>
+                </div>
+                <div class="absolute top-20 -right-4 md:-right-8 p-4 bg-blue-600 rounded-2xl shadow-xl shadow-blue-200/50 transform rotate-6 print-hide hidden md:block">
+                    <i data-lucide="trending-up" class="w-10 h-10 text-white"></i>
+                </div>
+                <div class="absolute bottom-10 left-4 md:left-10 p-4 bg-emerald-600 rounded-2xl shadow-xl shadow-emerald-200/50 transform -rotate-3 print-hide hidden md:block">
+                    <i data-lucide="shield-check" class="w-10 h-10 text-white"></i>
                 </div>
 
                 <!-- Hero Content -->
-                <div class="lg:col-span-7 order-2 lg:order-1 text-center lg:text-left print:w-[calc(100%-164px)] print:order-2 print:text-left print:mt-0">
-                    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-md border border-slate-100 mb-6 transform hover:-translate-y-1 transition-transform print-no-shadow print-border print:py-1 print:px-3 print:mb-3">
-                        <i data-lucide="sparkles" class="w-5 h-5 text-amber-500 print:w-4 print:h-4"></i>
-                        <span class="text-sm font-bold tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500 print:text-xs">
-                            Learning & Development Expert
-                        </span>
-                    </div>
-                    
-                    <h1 class="text-5xl md:text-7xl font-extrabold text-slate-800 mb-4 tracking-tight leading-tight print:text-3xl print:mb-1">
-                        Prahoro Yudo <br class="hidden md:block print:hidden"/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Purwono</span>
-                    </h1>
-                    
-                    <p class="text-xl md:text-2xl font-bold text-slate-500 mb-8 print:text-base print:mb-4">
-                        S.M., S.S., M.Hum., C.T., CHRS.
-                    </p>
+                <div class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-slate-900 shadow-xl shadow-slate-200 border border-slate-800 mb-8 transform hover:-translate-y-1 transition-transform print-no-shadow print-border print:py-1 print:px-3 print:mb-4 print:bg-white print:rounded-md">
+                    <i data-lucide="compass" class="w-5 h-5 text-amber-400 print:text-slate-600 print:w-4 print:h-4"></i>
+                    <span class="text-sm font-bold tracking-widest uppercase text-white print:text-slate-800 print:text-xs">
+                        Learning & Development Expert
+                    </span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black text-slate-900 mb-4 tracking-tight leading-tight print:text-4xl print:mb-2 uppercase">
+                    Prahoro Yudo <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600">Purwono</span>
+                </h1>
+                
+                <p class="text-2xl md:text-3xl font-bold text-slate-500 mb-12 print:text-lg print:mb-6">
+                    S.M., S.S., M.Hum., C.T., CHRS.
+                </p>
 
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-10 print:gap-2 print:mb-0">
-                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
-                            <div class="p-2 bg-blue-100 rounded-xl text-blue-600 print-hide"><i data-lucide="phone" class="w-4 h-4"></i></div>
-                            <span class="font-medium print:text-xs print:font-semibold">081615117369</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
-                            <div class="p-2 bg-pink-100 rounded-xl text-pink-600 print-hide"><i data-lucide="mail" class="w-4 h-4"></i></div>
-                            <span class="font-medium break-all print:text-xs print:font-semibold">prahoroyudopurwono@gmail.com</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
-                            <div class="p-2 bg-emerald-100 rounded-xl text-emerald-600 print-hide"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-                            <span class="font-medium print:text-xs print:font-semibold">Kediri, Jawa Timur</span>
-                        </div>
+                <div class="flex flex-wrap justify-center gap-4 print:gap-2 print:mb-0">
+                    <div class="flex items-center gap-3 text-slate-700 bg-white px-6 py-4 rounded-xl shadow-md border border-slate-200 hover:-translate-y-1 hover:shadow-lg transition-all print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
+                        <div class="p-2.5 bg-slate-100 rounded-lg text-slate-700 print-hide"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                        <span class="font-bold text-lg print:text-xs">081615117369</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-700 bg-white px-6 py-4 rounded-xl shadow-md border border-slate-200 hover:-translate-y-1 hover:shadow-lg transition-all print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
+                        <div class="p-2.5 bg-slate-100 rounded-lg text-slate-700 print-hide"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                        <span class="font-bold text-lg break-all print:text-xs">prahoroyudopurwono@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-700 bg-white px-6 py-4 rounded-xl shadow-md border border-slate-200 hover:-translate-y-1 hover:shadow-lg transition-all print:py-1.5 print:px-3 print-no-shadow print-border print:rounded-lg">
+                        <div class="p-2.5 bg-slate-100 rounded-lg text-slate-700 print-hide"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                        <span class="font-bold text-lg print:text-xs">Kediri, Jawa Timur</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- 2. CORE EXPERTISE SECTION -->
-        <section class="px-6 py-16 bg-slate-50 relative print-break-avoid print:py-6 print:bg-white">
+        <section class="px-6 py-16 relative z-10 print-break-avoid print:py-6">
             <div class="max-w-5xl mx-auto text-center print:text-left">
-                <div class="inline-flex items-center justify-center p-3 bg-purple-100 text-purple-600 rounded-2xl mb-6 shadow-sm transform -rotate-3 hover:rotate-0 transition-transform print:hidden">
+                <div class="inline-flex items-center justify-center p-4 bg-blue-600 text-white rounded-xl mb-8 shadow-lg shadow-blue-200 transform hover:scale-105 transition-transform print:hidden">
                     <i data-lucide="award" class="w-8 h-8"></i>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-10 print:text-xl print:mb-4 print:border-b-2 print:border-slate-200 print:pb-2">Core Expertise & Skills</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-12 uppercase tracking-wide print:text-2xl print:mb-4 print:border-b-2 print:border-slate-800 print:pb-2">Core Expertise & Skills</h2>
                 
                 <div class="flex flex-wrap justify-center print:justify-start gap-4 print:gap-2">
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Learning Strategy Design</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Instructional Design</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Curriculum Development</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Talent Development</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Program Evaluation & ROI</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Data Analysis (Excel)</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Data-Driven Decision</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">People Development</span>
-                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center print:px-3 print:py-1.5 print:text-xs print-no-shadow print-border print:rounded-lg">Training Management</span>
+                    <!-- Masculine structured pills -->
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Learning Strategy Design</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Instructional Design</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Curriculum Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Talent Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Program Evaluation & ROI</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Data Analysis (Excel)</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Data-Driven Decision</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">People Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-800 rounded-lg text-base md:text-lg font-bold shadow-sm border border-slate-300 hover:border-blue-500 hover:bg-blue-50 transition-all print:px-3 print:py-1.5 print:text-xs print-no-shadow">Training Management</span>
                 </div>
             </div>
         </section>
 
         <!-- 3. EXPERIENCE PRESENTATION SLIDES -->
-        <section class="px-6 py-24 bg-white overflow-hidden print:py-4">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-20 print:text-left print:mb-6">
-                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6 print:text-xl print:mb-2 print:border-b-2 print:border-slate-200 print:pb-2">Career Journey</h2>
-                    <div class="w-24 h-1.5 bg-gradient-to-r from-pink-400 to-orange-400 mx-auto rounded-full print-hide"></div>
+        <section class="px-6 py-20 relative z-10 print:py-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16 print:text-left print:mb-6">
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 uppercase tracking-wide print:text-2xl print:mb-2 print:border-b-2 print:border-slate-800 print:pb-2">Career Journey</h2>
+                    <div class="w-24 h-1.5 bg-slate-800 mx-auto print-hide"></div>
                 </div>
 
-                <div class="space-y-32 print:space-y-6">
+                <div class="space-y-8 print:space-y-6">
                     
                     <!-- EXP 1 -->
-                    <div class="flex flex-col lg:flex-row gap-12 items-center print-break-avoid print:flex-row print:gap-6 print:items-start">
-                        <div class="w-full sm:w-3/4 md:w-2/3 lg:w-2/5 mx-auto relative group shrink-0 print:w-[100px] print:mx-0">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 to-rose-400 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
-                            <div id="job-photo-container-1" class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center print:border-solid print:border-slate-300 print-no-shadow">
-                                <div class="text-center text-slate-400 print-hide">
-                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400"></i>
-                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Portrait</span>
-                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
-                                </div>
-                            </div>
-                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-[2rem]">
-                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-1" />
-                                <div class="p-4 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                                    <i data-lucide="upload" class="w-8 h-8"></i>
-                                </div>
-                                <span class="text-slate-800 font-bold">Change Work Photo</span>
-                            </label>
+                    <div class="bg-white rounded-2xl p-8 md:p-10 shadow-lg border-l-8 border-blue-600 print-break-avoid flex flex-col md:flex-row gap-8 relative overflow-hidden group print-no-shadow print-border print:rounded-xl print:p-4 print:gap-4">
+                        <div class="absolute right-0 top-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 print-hide pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                            <i data-lucide="presentation" class="w-64 h-64 text-blue-900"></i>
                         </div>
-                        <div class="w-full lg:w-3/5 text-left print:w-[calc(100%-124px)]">
-                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-pink-200 print:px-2 print:py-1 print:text-[10px] print:mb-2 print-no-shadow print:rounded-md">
-                                2025 - Present
+                        
+                        <div class="shrink-0 print:hidden">
+                            <div class="w-16 h-16 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center">
+                                <i data-lucide="bar-chart-2" class="w-8 h-8 text-blue-600"></i>
                             </div>
-                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight print:text-lg print:mb-1">Trainer of Data Analysis & Public Speaking</h3>
-                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3 print:text-sm print:mb-2 print:gap-2">
-                                <div class="p-2 bg-slate-100 rounded-xl print:hidden"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
-                                PT Yureka Edukasi Cipta
-                            </h4>
-                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 print:space-y-1 print:p-0 print:bg-transparent print:border-none print-no-shadow">
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Delivered training sessions on data analysis using Microsoft Excel (formulas, pivot tables, data visualization, and basic data processing).</p>
+                        </div>
+
+                        <div class="relative z-10 w-full">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4 print:mb-2 print:gap-1">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 print:text-lg">Trainer of Data Analysis & Public Speaking</h3>
+                                    <h4 class="text-lg text-slate-600 font-bold mt-1 flex items-center gap-2 print:text-sm">
+                                        <i data-lucide="building-2" class="w-5 h-5 text-slate-400 print:w-4 print:h-4"></i> PT Yureka Edukasi Cipta
+                                    </h4>
+                                </div>
+                                <div class="inline-block px-4 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold uppercase text-sm border border-slate-200 self-start print:px-2 print:py-1 print:text-[10px] print:bg-transparent print:border-slate-300">
+                                    2025 - Present
+                                </div>
+                            </div>
+                            
+                            <hr class="border-slate-100 my-4 print-hide">
+
+                            <ul class="space-y-3 print:space-y-1">
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Delivered training sessions on data analysis using Microsoft Excel (formulas, pivot tables, data visualization, and basic data processing).</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Designed practical, hands-on training materials and case studies to improve participants analytical and problem-solving skills.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Designed practical, hands-on training materials and case studies to improve participants analytical and problem-solving skills.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Conducted public speaking and presentation skills training to enhance communication, confidence, and audience engagement.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Conducted public speaking and presentation skills training to enhance communication, confidence, and audience engagement.</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- EXP 2 -->
-                    <div class="flex flex-col lg:flex-row-reverse gap-12 items-center print-break-avoid print:flex-row print:gap-6 print:items-start">
-                        <div class="w-full sm:w-3/4 md:w-2/3 lg:w-2/5 mx-auto relative group shrink-0 print:w-[100px] print:mx-0">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
-                            <div id="job-photo-container-2" class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center print:border-solid print:border-slate-300 print-no-shadow">
-                                <div class="text-center text-slate-400 print-hide">
-                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400"></i>
-                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Portrait</span>
-                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
-                                </div>
-                            </div>
-                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-[2rem]">
-                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-2" />
-                                <div class="p-4 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                                    <i data-lucide="upload" class="w-8 h-8"></i>
-                                </div>
-                                <span class="text-slate-800 font-bold">Change Work Photo</span>
-                            </label>
+                    <div class="bg-white rounded-2xl p-8 md:p-10 shadow-lg border-l-8 border-slate-800 print-break-avoid flex flex-col md:flex-row gap-8 relative overflow-hidden group print-no-shadow print-border print:rounded-xl print:p-4 print:gap-4">
+                        <div class="absolute right-0 top-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 print-hide pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                            <i data-lucide="network" class="w-64 h-64 text-slate-900"></i>
                         </div>
-                        <div class="w-full lg:w-3/5 text-left print:w-[calc(100%-124px)]">
-                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-blue-200 print:px-2 print:py-1 print:text-[10px] print:mb-2 print-no-shadow print:rounded-md">
-                                2021 - Present
+                        <div class="shrink-0 print:hidden">
+                            <div class="w-16 h-16 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center">
+                                <i data-lucide="users-2" class="w-8 h-8 text-slate-800"></i>
                             </div>
-                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight print:text-lg print:mb-1">Learning and Development Lead</h3>
-                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3 print:text-sm print:mb-2 print:gap-2">
-                                <div class="p-2 bg-slate-100 rounded-xl print:hidden"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
-                                PT Yureka Edukasi Cipta
-                            </h4>
-                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 print:space-y-1 print:p-0 print:bg-transparent print:border-none print-no-shadow">
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Developed and executed annual L&D plans based on Training Needs Analysis (TNA) across all departments.</p>
+                        </div>
+                        <div class="relative z-10 w-full">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4 print:mb-2 print:gap-1">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 print:text-lg">Learning and Development Lead</h3>
+                                    <h4 class="text-lg text-slate-600 font-bold mt-1 flex items-center gap-2 print:text-sm">
+                                        <i data-lucide="building-2" class="w-5 h-5 text-slate-400 print:w-4 print:h-4"></i> PT Yureka Edukasi Cipta
+                                    </h4>
+                                </div>
+                                <div class="inline-block px-4 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold uppercase text-sm border border-slate-200 self-start print:px-2 print:py-1 print:text-[10px] print:bg-transparent print:border-slate-300">
+                                    2021 - Present
+                                </div>
+                            </div>
+                            <hr class="border-slate-100 my-4 print-hide">
+                            <ul class="space-y-3 print:space-y-1">
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-800 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Developed and executed annual L&D plans based on Training Needs Analysis (TNA) across all departments.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Designed training curricula and modules (hard skills & soft skills), including syllabus, learning materials, and evaluation methods.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-800 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Designed training curricula and modules (hard skills & soft skills), including syllabus, learning materials, and evaluation methods.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Designed and implemented people development programs such as IDP, competency mapping, and talent & succession programs.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-800 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Designed and implemented people development programs such as IDP, competency mapping, and talent & succession programs.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Evaluated training effectiveness through participant feedback, assessments, and KPI analysis.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-800 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Evaluated training effectiveness through participant feedback, assessments, and KPI analysis.</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- EXP 3 -->
-                    <div class="flex flex-col lg:flex-row gap-12 items-center print-break-avoid print:flex-row print:gap-6 print:items-start">
-                        <div class="w-full sm:w-3/4 md:w-2/3 lg:w-2/5 mx-auto relative group shrink-0 print:w-[100px] print:mx-0">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
-                            <div id="job-photo-container-3" class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center print:border-solid print:border-slate-300 print-no-shadow">
-                                <div class="text-center text-slate-400 print-hide">
-                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400"></i>
-                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Portrait</span>
-                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
-                                </div>
-                            </div>
-                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-[2rem]">
-                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-3" />
-                                <div class="p-4 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                                    <i data-lucide="upload" class="w-8 h-8"></i>
-                                </div>
-                                <span class="text-slate-800 font-bold">Change Work Photo</span>
-                            </label>
+                    <div class="bg-white rounded-2xl p-8 md:p-10 shadow-lg border-l-8 border-emerald-600 print-break-avoid flex flex-col md:flex-row gap-8 relative overflow-hidden group print-no-shadow print-border print:rounded-xl print:p-4 print:gap-4">
+                        <div class="absolute right-0 top-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 print-hide pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                            <i data-lucide="coffee" class="w-64 h-64 text-emerald-900"></i>
                         </div>
-                        <div class="w-full lg:w-3/5 text-left print:w-[calc(100%-124px)]">
-                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-emerald-200 print:px-2 print:py-1 print:text-[10px] print:mb-2 print-no-shadow print:rounded-md">
-                                2021
+                        <div class="shrink-0 print:hidden">
+                            <div class="w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-center">
+                                <i data-lucide="store" class="w-8 h-8 text-emerald-600"></i>
                             </div>
-                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight print:text-lg print:mb-1">Bartender and Sales Support Staff</h3>
-                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3 print:text-sm print:mb-2 print:gap-2">
-                                <div class="p-2 bg-slate-100 rounded-xl print:hidden"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
-                                PT Esteh Indonesia Makmur
-                            </h4>
-                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 print:space-y-1 print:p-0 print:bg-transparent print:border-none print-no-shadow">
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Managed day-to-day beverage preparation ensuring quality and consistency according to standard operating procedures.</p>
+                        </div>
+                        <div class="relative z-10 w-full">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4 print:mb-2 print:gap-1">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 print:text-lg">Bartender and Sales Support Staff</h3>
+                                    <h4 class="text-lg text-slate-600 font-bold mt-1 flex items-center gap-2 print:text-sm">
+                                        <i data-lucide="building-2" class="w-5 h-5 text-slate-400 print:w-4 print:h-4"></i> PT Esteh Indonesia Makmur
+                                    </h4>
+                                </div>
+                                <div class="inline-block px-4 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold uppercase text-sm border border-slate-200 self-start print:px-2 print:py-1 print:text-[10px] print:bg-transparent print:border-slate-300">
+                                    2021
+                                </div>
+                            </div>
+                            <hr class="border-slate-100 my-4 print-hide">
+                            <ul class="space-y-3 print:space-y-1">
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Managed day-to-day beverage preparation ensuring quality and consistency according to standard operating procedures.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Supported sales initiatives and customer service excellence to achieve daily store targets.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Supported sales initiatives and customer service excellence to achieve daily store targets.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Maintained inventory and operational cleanliness, contributing to a highly efficient retail environment.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Maintained inventory and operational cleanliness, contributing to a highly efficient retail environment.</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- EXP 4 -->
-                    <div class="flex flex-col lg:flex-row-reverse gap-12 items-center print-break-avoid print:flex-row print:gap-6 print:items-start">
-                        <div class="w-full sm:w-3/4 md:w-2/3 lg:w-2/5 mx-auto relative group shrink-0 print:w-[100px] print:mx-0">
-                            <div class="absolute -inset-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
-                            <div id="job-photo-container-4" class="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center print:border-solid print:border-slate-300 print-no-shadow">
-                                <div class="text-center text-slate-400 print-hide">
-                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400"></i>
-                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Portrait</span>
-                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
-                                </div>
-                            </div>
-                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-[2rem]">
-                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-4" />
-                                <div class="p-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                                    <i data-lucide="upload" class="w-8 h-8"></i>
-                                </div>
-                                <span class="text-slate-800 font-bold">Change Work Photo</span>
-                            </label>
+                    <div class="bg-white rounded-2xl p-8 md:p-10 shadow-lg border-l-8 border-slate-400 print-break-avoid flex flex-col md:flex-row gap-8 relative overflow-hidden group print-no-shadow print-border print:rounded-xl print:p-4 print:gap-4">
+                        <div class="absolute right-0 top-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500 print-hide pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                            <i data-lucide="pen-tool" class="w-64 h-64 text-slate-600"></i>
                         </div>
-                        <div class="w-full lg:w-3/5 text-left print:w-[calc(100%-124px)]">
-                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-amber-200 print:px-2 print:py-1 print:text-[10px] print:mb-2 print-no-shadow print:rounded-md">
-                                2020 - 2021
+                        <div class="shrink-0 print:hidden">
+                            <div class="w-16 h-16 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center">
+                                <i data-lucide="keyboard" class="w-8 h-8 text-slate-500"></i>
                             </div>
-                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight print:text-lg print:mb-1">Copywriter & UX Writer Lead</h3>
-                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3 print:text-sm print:mb-2 print:gap-2">
-                                <div class="p-2 bg-slate-100 rounded-xl print:hidden"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
-                                Conecworld Group
-                            </h4>
-                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 print:space-y-1 print:p-0 print:bg-transparent print:border-none print-no-shadow">
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Led copywriting initiatives for marketing campaigns, ensuring brand voice consistency across all digital channels.</p>
+                        </div>
+                        <div class="relative z-10 w-full">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4 print:mb-2 print:gap-1">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 print:text-lg">Copywriter & UX Writer Lead</h3>
+                                    <h4 class="text-lg text-slate-600 font-bold mt-1 flex items-center gap-2 print:text-sm">
+                                        <i data-lucide="building-2" class="w-5 h-5 text-slate-400 print:w-4 print:h-4"></i> Conecworld Group
+                                    </h4>
+                                </div>
+                                <div class="inline-block px-4 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold uppercase text-sm border border-slate-200 self-start print:px-2 print:py-1 print:text-[10px] print:bg-transparent print:border-slate-300">
+                                    2020 - 2021
+                                </div>
+                            </div>
+                            <hr class="border-slate-100 my-4 print-hide">
+                            <ul class="space-y-3 print:space-y-1">
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-500 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Led copywriting initiatives for marketing campaigns, ensuring brand voice consistency across all digital channels.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Designed and optimized UX copy for digital products, improving user navigation and overall digital experience.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-500 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Designed and optimized UX copy for digital products, improving user navigation and overall digital experience.</p>
                                 </li>
-                                <li class="flex items-start gap-4 text-slate-600 font-medium print:gap-2 print:text-sm print:font-normal print:leading-snug">
-                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
-                                    <span class="hidden print:inline-block print:font-bold print:text-slate-400">•</span>
-                                    <p class="text-lg leading-relaxed print:text-sm">Collaborated with design and product teams to create compelling narratives that drive user engagement and conversions.</p>
+                                <li class="flex items-start gap-4 text-slate-700 print:gap-2 print:text-sm">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-500 shrink-0 mt-0.5 print-hide"></i>
+                                    <span class="hidden print:inline-block print:font-bold">•</span>
+                                    <p class="leading-relaxed print:text-sm">Collaborated with design and product teams to create compelling narratives that drive user engagement and conversions.</p>
                                 </li>
                             </ul>
                         </div>
@@ -364,111 +319,106 @@
             </div>
         </section>
 
-        <!-- 4. DIGITAL PRESENCE (TIKTOK & IG) -->
-        <section class="px-6 py-24 bg-gradient-to-b from-sky-50 to-indigo-50 border-y border-slate-200 print-break-avoid print:py-6 print:bg-white print:border-none">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 text-center md:text-left print:mb-6">
-                    <div>
-                        <h2 class="text-4xl font-extrabold text-slate-800 mb-4 print:text-xl print:mb-2 print:border-b-2 print:border-slate-200 print:pb-2 print:text-left">Digital Presence</h2>
-                        <p class="text-slate-500 text-lg font-medium print:hidden">My creative portfolio and professional branding across platforms.</p>
-                    </div>
-                    <div class="mt-6 md:mt-0 flex justify-center md:justify-start gap-3 print-hide">
-                        <div class="w-12 h-2 bg-pink-400 rounded-full"></div>
-                        <div class="w-12 h-2 bg-purple-400 rounded-full"></div>
-                        <div class="w-12 h-2 bg-blue-400 rounded-full"></div>
-                    </div>
+        <!-- 4. DIGITAL PRESENCE (TIKTOK & IG - PROFESSIONAL) -->
+        <section class="px-6 py-16 relative z-10 print-break-avoid print:py-6 print:bg-white print:border-none">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12 print:text-left print:mb-6">
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 uppercase tracking-wide print:text-2xl print:mb-2 print:border-b-2 print:border-slate-800 print:pb-2">Digital Presence</h2>
+                    <p class="text-slate-500 text-lg print:hidden">Connect with my professional content and insights.</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 print:grid-cols-2 print:gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:grid-cols-2 print:gap-4">
                     
-                    <!-- TikTok Landscape Card -->
-                    <div class="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300 print:rounded-xl print-no-shadow print-border">
-                        <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full shadow-lg print:top-2 print:left-2 print:px-2 print:py-1 print-no-shadow">
-                            <i data-lucide="play-square" class="w-5 h-5 print:w-3 print:h-3"></i>
-                            <span class="font-bold text-sm tracking-wide print:text-[10px]">TikTok</span>
+                    <!-- TikTok Card -->
+                    <a href="https://tiktok.com/@pyp_raesland" target="_blank" class="group block relative rounded-2xl bg-slate-900 border border-slate-700 p-8 overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-cyan-900/30 transition-all duration-300 print:rounded-xl print-bg-white print-border print-no-shadow print:p-4 print:text-dark">
+                        <div class="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-110 transition-transform duration-700 print-hide">
+                            <i data-lucide="video" class="w-40 h-40 text-white"></i>
                         </div>
                         
-                        <div id="tiktok-photo-container" class="aspect-video w-full relative bg-slate-50 flex items-center justify-center border-4 border-white print:border-none">
-                            <div class="text-center text-slate-400 print-hide">
-                                <i data-lucide="image" class="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500"></i>
-                                <span class="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
+                        <div class="relative z-10 flex flex-col items-center justify-center text-center h-full gap-4">
+                            <i data-lucide="play-circle" class="w-12 h-12 text-cyan-400 print-hide"></i>
+                            <h3 class="text-2xl font-bold text-white tracking-widest uppercase print:text-slate-800 print:text-base print:tracking-normal">TikTok Content</h3>
+                            <div class="mt-2 inline-block px-6 py-2 bg-slate-800 border border-slate-600 rounded-lg group-hover:bg-cyan-900/50 transition-colors print-bg-white print-border print-no-shadow print:px-3 print:py-1">
+                                <span class="font-mono font-bold text-cyan-400 print:text-slate-600 print:text-sm">@pyp_raesland</span>
                             </div>
                         </div>
+                    </a>
 
-                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide">
-                            <input type="file" accept="image/*" class="hidden" id="tiktok-photo-input" />
-                            <div class="p-4 bg-black rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
-                                <i data-lucide="upload" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-slate-800 font-extrabold text-lg">Upload TikTok Preview</span>
-                        </label>
-                    </div>
-
-                    <!-- Instagram Landscape Card -->
-                    <div class="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300 print:rounded-xl print-no-shadow print-border">
-                        <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white px-5 py-2.5 rounded-full shadow-lg print:top-2 print:left-2 print:px-2 print:py-1 print-no-shadow">
-                            <i data-lucide="instagram" class="w-5 h-5 print:w-3 print:h-3"></i>
-                            <span class="font-bold text-sm tracking-wide print:text-[10px]">Instagram</span>
+                    <!-- Instagram Card -->
+                    <a href="https://instagram.com/pyp_raesland" target="_blank" class="group block relative rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-900 border border-slate-700 p-8 overflow-hidden shadow-lg hover:-translate-y-1 hover:shadow-slate-800/30 transition-all duration-300 print:rounded-xl print-bg-white print-border print-no-shadow print:p-4 print:text-dark">
+                        <div class="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-110 transition-transform duration-700 print-hide">
+                            <i data-lucide="camera" class="w-40 h-40 text-white"></i>
                         </div>
                         
-                        <div id="ig-photo-container" class="aspect-video w-full relative bg-slate-50 flex items-center justify-center border-4 border-white print:border-none">
-                            <div class="text-center text-slate-400 print-hide">
-                                <i data-lucide="image" class="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500"></i>
-                                <span class="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
+                        <div class="relative z-10 flex flex-col items-center justify-center text-center h-full gap-4">
+                            <i data-lucide="instagram" class="w-12 h-12 text-rose-400 print-hide"></i>
+                            <h3 class="text-2xl font-bold text-white tracking-widest uppercase print:text-slate-800 print:text-base print:tracking-normal">Instagram Portfolio</h3>
+                            <div class="mt-2 inline-block px-6 py-2 bg-slate-800 border border-slate-600 rounded-lg group-hover:bg-rose-900/30 transition-colors print-bg-white print-border print-no-shadow print:px-3 print:py-1">
+                                <span class="font-mono font-bold text-rose-400 print:text-slate-600 print:text-sm">@pyp_raesland</span>
                             </div>
                         </div>
-
-                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide">
-                            <input type="file" accept="image/*" class="hidden" id="ig-photo-input" />
-                            <div class="p-4 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
-                                <i data-lucide="upload" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-slate-800 font-extrabold text-lg">Upload IG Preview</span>
-                        </label>
-                    </div>
+                    </a>
 
                 </div>
             </div>
         </section>
 
         <!-- 5. EDUCATION & CERTIFICATIONS -->
-        <section class="px-6 py-24 bg-white relative print-break-avoid print:py-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 print:gap-6">
+        <section class="px-6 py-20 relative z-10 print-break-avoid print:py-6">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 print:gap-6">
                 
                 <!-- Education -->
-                <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-10 md:p-12 rounded-[2.5rem] border border-orange-100 shadow-xl shadow-orange-100/50 hover:shadow-2xl hover:shadow-orange-200/50 transition-shadow print:bg-white print:p-6 print-no-shadow print-border print:rounded-xl">
-                    <div class="w-16 h-16 bg-orange-400 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-200 transform -rotate-3 print:w-10 print:h-10 print:mb-4 print:rounded-lg print-no-shadow print:rotate-0">
-                        <i data-lucide="graduation-cap" class="w-8 h-8 text-white print:w-5 print:h-5"></i>
+                <div class="bg-slate-900 text-white p-10 rounded-2xl shadow-xl hover:-translate-y-1 transition-transform relative overflow-hidden print:bg-white print:text-slate-900 print:p-4 print-no-shadow print-border print:rounded-xl">
+                    <div class="absolute -right-4 -bottom-4 opacity-5 print-hide">
+                        <i data-lucide="graduation-cap" class="w-48 h-48 text-white"></i>
                     </div>
-                    <h2 class="text-3xl font-extrabold text-slate-800 mb-8 print:text-xl print:mb-4 border-b-2 border-transparent print:border-slate-200 print:pb-2">Education</h2>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-orange-50 print:p-4 print-border print-no-shadow print:rounded-lg">
-                        <h3 class="text-2xl font-bold text-slate-800 print:text-base">Master of Applied Linguistic</h3>
-                        <p class="text-lg text-orange-500 font-bold mt-2 mb-6 print:text-sm print:mb-3">Universitas Indonesia</p>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 rounded-xl text-orange-700 font-bold text-lg print:px-3 print:py-1 print:text-sm print:rounded-md">
-                            <span class="text-orange-500/80 text-sm uppercase tracking-wide print:text-[10px]">Final GPA</span> 
-                            3.73
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-8 print:mb-4">
+                            <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center print-hide border border-slate-700">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-amber-400"></i>
+                            </div>
+                            <h2 class="text-3xl font-black uppercase tracking-wide print:text-xl border-b-2 border-transparent print:border-slate-800 print:pb-2 print:border-b">Education</h2>
+                        </div>
+                        
+                        <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl print:p-0 print:bg-transparent print:border-none">
+                            <h3 class="text-2xl font-black text-white print:text-slate-900 print:text-base">Master of Applied Linguistic</h3>
+                            <p class="text-lg text-slate-400 font-bold mt-2 mb-6 print:text-sm print:mb-3 print:text-slate-600">Universitas Indonesia</p>
+                            <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-lg border border-slate-700 text-white font-bold print:px-0 print:py-0 print:border-none print-no-shadow print:text-sm print:text-slate-800">
+                                <span class="text-slate-400 text-sm uppercase tracking-wider print:text-[10px] print:text-slate-500">Final GPA</span> 
+                                3.73
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Certifications -->
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-10 md:p-12 rounded-[2.5rem] border border-purple-100 shadow-xl shadow-purple-100/50 hover:shadow-2xl hover:shadow-purple-200/50 transition-shadow print:bg-white print:p-6 print-no-shadow print-border print:rounded-xl">
-                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-purple-200 transform rotate-3 print:w-10 print:h-10 print:mb-4 print:rounded-lg print-no-shadow print:rotate-0">
-                        <i data-lucide="award" class="w-8 h-8 text-white print:w-5 print:h-5"></i>
+                <div class="bg-slate-900 text-white p-10 rounded-2xl shadow-xl hover:-translate-y-1 transition-transform relative overflow-hidden print:bg-white print:text-slate-900 print:p-4 print-no-shadow print-border print:rounded-xl">
+                    <div class="absolute -right-4 -bottom-4 opacity-5 print-hide">
+                        <i data-lucide="award" class="w-48 h-48 text-white"></i>
                     </div>
-                    <h2 class="text-3xl font-extrabold text-slate-800 mb-8 print:text-xl print:mb-4 border-b-2 border-transparent print:border-slate-200 print:pb-2">Certifications <span class="text-purple-400 text-xl print:text-sm">(2025)</span></h2>
-                    <div class="space-y-4 print:space-y-2">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3 print:p-3 print-border print-no-shadow print:rounded-lg">
-                            <span class="text-lg font-bold text-slate-700 print:text-sm">Certified Trainer KKNI Level 4</span>
-                            <span class="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto print:px-2 print:py-1 print:text-xs print:rounded-md">BNSP</span>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-8 print:mb-4">
+                            <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center print-hide border border-slate-700">
+                                <i data-lucide="award" class="w-8 h-8 text-emerald-400"></i>
+                            </div>
+                            <h2 class="text-3xl font-black uppercase tracking-wide print:text-xl border-b-2 border-transparent print:border-slate-800 print:pb-2 print:border-b">Certifications <span class="text-slate-500 text-xl print:text-sm">(2025)</span></h2>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3 print:p-3 print-border print-no-shadow print:rounded-lg">
-                            <span class="text-lg font-bold text-slate-700 print:text-sm">Certified HR Supervisor</span>
-                            <span class="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto print:px-2 print:py-1 print:text-xs print:rounded-md">BNSP</span>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3 print:p-3 print-border print-no-shadow print:rounded-lg">
-                            <span class="text-lg font-bold text-slate-700 print:text-sm">TOEFL ITP Official</span>
-                            <span class="text-sm font-extrabold text-pink-600 bg-pink-100 px-4 py-1.5 rounded-xl self-start sm:self-auto print:px-2 print:py-1 print:text-xs print:rounded-md">Score: 537</span>
+                        
+                        <div class="space-y-4 print:space-y-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl gap-3 print:p-0 print:bg-transparent print:border-none">
+                                <span class="text-lg font-bold text-white print:text-slate-900 print:text-sm print:font-medium">Certified Trainer KKNI Level 4</span>
+                                <span class="text-xs font-bold text-slate-300 bg-slate-700 border border-slate-600 px-3 py-1 rounded-md self-start sm:self-auto print:px-2 print:py-1 print:text-[10px] print:border-slate-300 print:text-slate-600 print-no-shadow print:bg-white">BNSP</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl gap-3 print:p-0 print:bg-transparent print:border-none">
+                                <span class="text-lg font-bold text-white print:text-slate-900 print:text-sm print:font-medium">Certified HR Supervisor</span>
+                                <span class="text-xs font-bold text-slate-300 bg-slate-700 border border-slate-600 px-3 py-1 rounded-md self-start sm:self-auto print:px-2 print:py-1 print:text-[10px] print:border-slate-300 print:text-slate-600 print-no-shadow print:bg-white">BNSP</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-800 border border-slate-700 rounded-xl gap-3 print:p-0 print:bg-transparent print:border-none">
+                                <span class="text-lg font-bold text-white print:text-slate-900 print:text-sm print:font-medium">TOEFL ITP Official</span>
+                                <span class="text-xs font-bold text-slate-300 bg-slate-700 border border-slate-600 px-3 py-1 rounded-md self-start sm:self-auto print:px-2 print:py-1 print:text-[10px] print:border-slate-300 print:text-slate-600 print-no-shadow print:bg-white">Score: 537</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -477,52 +427,20 @@
         </section>
 
         <!-- FOOTER -->
-        <footer class="py-12 text-center border-t border-slate-200 bg-slate-50 print-hide">
-            <p class="text-slate-500 font-medium">© 2026 Prahoro Yudo Purwono. Interactive Portfolio.</p>
+        <footer class="py-10 text-center relative z-10 print-hide">
+            <p class="text-slate-500 font-bold text-sm">© 2026 Prahoro Yudo Purwono. Professional HR Portfolio.</p>
         </footer>
     </div>
 
     <!-- FLOATING DOWNLOAD BUTTON -->
-    <button onclick="window.print()" class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-gradient-to-r from-slate-800 to-slate-900 text-white px-6 py-4 rounded-full shadow-2xl transition-all duration-300 group hover:scale-105 hover:shadow-pink-500/30 print-hide">
-        <i data-lucide="printer" class="w-5 h-5 group-hover:-translate-y-1 transition-transform"></i>
+    <button onclick="window.print()" class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-slate-900 border border-slate-700 text-white px-6 py-4 rounded-xl shadow-2xl transition-all duration-300 group hover:-translate-y-1 hover:shadow-blue-900/50 hover:bg-slate-800 print-hide">
+        <i data-lucide="printer" class="w-5 h-5 group-hover:scale-110 transition-transform text-cyan-400"></i>
         <span class="font-bold tracking-wide">Cetak PDF</span>
     </button>
 
-    <!-- Script to Handle File Uploads & Initialize Icons -->
+    <!-- Initialize Icons -->
     <script>
-        // Inisialisasi ikon Lucide
         lucide.createIcons();
-
-        // Fungsi Universal untuk menangani preview gambar
-        function setupImageUpload(inputId, containerId) {
-            const input = document.getElementById(inputId);
-            const container = document.getElementById(containerId);
-
-            if (input && container) {
-                input.addEventListener('change', function(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            // Mengganti isi container langsung dengan elemen gambar (image cover)
-                            container.innerHTML = `<img src="${e.target.result}" alt="Uploaded Photo" class="w-full h-full object-cover rounded-[inherit]" />`;
-                            // Hapus style border dashed jika ada
-                            container.classList.remove('border-dashed', 'border-slate-300');
-                        }
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-        }
-
-        // Jalankan fungsi untuk setiap input file yang ada
-        setupImageUpload('main-photo-input', 'main-photo-container');
-        setupImageUpload('job-photo-input-1', 'job-photo-container-1');
-        setupImageUpload('job-photo-input-2', 'job-photo-container-2');
-        setupImageUpload('job-photo-input-3', 'job-photo-container-3');
-        setupImageUpload('job-photo-input-4', 'job-photo-container-4');
-        setupImageUpload('tiktok-photo-input', 'tiktok-photo-container');
-        setupImageUpload('ig-photo-input', 'ig-photo-container');
     </script>
 
 </body>
