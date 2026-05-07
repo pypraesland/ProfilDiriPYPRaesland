@@ -1,465 +1,492 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Mail, 
-  MapPin, 
-  Phone, 
-  Upload, 
-  Briefcase, 
-  GraduationCap, 
-  Award, 
-  BookOpen, 
-  Target, 
-  ChevronDown, 
-  ChevronUp,
-  Camera,
-  Instagram,
-  PlaySquare,
-  Image as ImageIcon,
-  ExternalLink,
-  Sparkles,
-  Download,
-  Loader2
-} from 'lucide-react';
-
-export default function App() {
-  const [mainPhoto, setMainPhoto] = useState(null);
-  const [jobPhotos, setJobPhotos] = useState({});
-  const [socialPhotos, setSocialPhotos] = useState({ tiktok: null, instagram: null });
-  const [expandedTraining, setExpandedTraining] = useState({});
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  useEffect(() => {
-    // Memuat library html2pdf secara dinamis untuk fitur unduh PDF langsung
-    const script = document.createElement('script');
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
-    script.async = true;
-    document.body.appendChild(script);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prahoro Yudo Purwono - Portfolio</title>
     
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  const handleMainPhotoUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setMainPhoto(e.target.result);
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleJobPhotoUpload = (index, event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setJobPhotos(prev => ({ ...prev, [index]: e.target.result }));
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSocialPhotoUpload = (platform, event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setSocialPhotos(prev => ({ ...prev, [platform]: e.target.result }));
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const toggleTraining = (index) => {
-    setExpandedTraining(prev => ({ ...prev, [index]: !prev[index] }));
-  };
-
-  const handleDownloadPDF = () => {
-    if (!window.html2pdf) {
-      console.warn("Library PDF belum siap, tunggu beberapa detik.");
-      return;
-    }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    setIsGenerating(true);
-    const element = document.getElementById('portfolio-content');
-    
-    const opt = {
-      margin:       [0.4, 0, 0.4, 0],
-      filename:     'Portfolio_Prahoro_Yudo_Purwono.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: ['css', 'avoid-all'] }
-    };
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    window.html2pdf().set(opt).from(element).save().then(() => {
-      setIsGenerating(false);
-    });
-  };
-
-  const skills = [
-    "Learning Strategy Design", "Instructional Design", "Curriculum Development", 
-    "Talent Development", "Program Evaluation & ROI", "Data Analysis (Excel)", 
-    "Data-Driven Decision", "People Development", "Training Management"
-  ];
-
-  const experiences = [
-    {
-      title: "Trainer of Data Analysis & Public Speaking",
-      company: "PT Yureka Edukasi Cipta",
-      period: "2025 - Present",
-      color: "from-pink-500 to-rose-400",
-      shadow: "shadow-pink-200",
-      points: [
-        "Delivered training sessions on data analysis using Microsoft Excel (formulas, pivot tables, data visualization, and basic data processing).",
-        "Designed practical, hands-on training materials and case studies to improve participants analytical and problem-solving skills.",
-        "Conducted public speaking and presentation skills training to enhance communication, confidence, and audience engagement."
-      ]
-    },
-    {
-      title: "Learning and Development Lead",
-      company: "PT Yureka Edukasi Cipta",
-      period: "2021 - Present",
-      color: "from-blue-500 to-cyan-400",
-      shadow: "shadow-blue-200",
-      points: [
-        "Developed and executed annual L&D plans based on Training Needs Analysis (TNA) across all departments.",
-        "Designed training curricula and modules (hard skills & soft skills), including syllabus, learning materials, and evaluation methods.",
-        "Designed and implemented people development programs such as IDP, competency mapping, and talent & succession programs.",
-        "Evaluated training effectiveness through participant feedback, assessments, and KPI analysis."
-      ]
-    },
-    {
-      title: "Bartender and Sales Support Staff",
-      company: "PT Esteh Indonesia Makmur",
-      period: "2021",
-      color: "from-emerald-400 to-teal-400",
-      shadow: "shadow-emerald-200",
-      points: [
-        "Managed day-to-day beverage preparation ensuring quality and consistency according to standard operating procedures.",
-        "Supported sales initiatives and customer service excellence to achieve daily store targets.",
-        "Maintained inventory and operational cleanliness, contributing to a highly efficient retail environment."
-      ]
-    },
-    {
-      title: "Copywriter & UX Writer Lead",
-      company: "Conecworld Group",
-      period: "2020 - 2021",
-      color: "from-amber-400 to-orange-400",
-      shadow: "shadow-amber-200",
-      points: [
-        "Led copywriting initiatives for marketing campaigns, ensuring brand voice consistency across all digital channels.",
-        "Designed and optimized UX copy for digital products, improving user navigation and overall digital experience.",
-        "Collaborated with design and product teams to create compelling narratives that drive user engagement and conversions."
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-pink-200 selection:text-pink-900">
-      
-      {/* GLOBAL PRINT STYLES */}
-      <style>{`
+    <style>
+        /* GLOBAL PRINT STYLES */
         @media print {
-          body {
-            -webkit-print-color-adjust: exact; /* Memaksa warna background tercetak */
-            print-color-adjust: exact;
-          }
-    `}</style>
+            body {
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important;
+                background-color: white !important;
+            }
+            /* Memastikan card tidak terpotong di tengah halaman saat print */
+            .print-break-avoid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            /* Menyembunyikan elemen yang tidak perlu saat print */
+            .print-hide {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-pink-200 selection:text-pink-900">
 
-    <div id="portfolio-content" className="bg-slate-50 relative pb-10">
-      {/* 1. HERO PRESENTATION SECTION */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 py-20 bg-white">
-        {/* Cheerful Abstract Backgrounds */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-pink-300/30 rounded-full blur-[100px]"></div>
-          <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-300/30 rounded-full blur-[120px]"></div>
-          <div className="absolute top-[20%] right-[10%] w-[300px] h-[300px] bg-yellow-300/30 rounded-full blur-[80px]"></div>
-        </div>
-        
-        <div className="max-w-6xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Profile Photo Upload */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-pink-400 via-orange-300 to-yellow-400 rounded-[2.5rem] blur-lg opacity-60 group-hover:opacity-100 transition duration-500"></div>
-              <div className={`relative w-64 h-80 md:w-80 md:h-[400px] rounded-[2rem] overflow-hidden bg-white border-4 border-white shadow-2xl flex items-center justify-center ${!mainPhoto && 'border-dashed border-slate-300'}`}>
-                {mainPhoto ? (
-              <img src={mainPhoto} alt="Prahoro" className="w-full h-full object-cover" />
-            ) : (
-              <div className="text-center text-slate-400 print:hidden">
-                <Camera className="w-12 h-12 mx-auto mb-3 opacity-60 text-pink-400" />
-                <span className="font-bold text-sm tracking-widest uppercase text-slate-500">Upload Portrait</span>
-              </div>
-            )}
-            <label data-html2canvas-ignore="true" className="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print:hidden">
-              <input type="file" accept="image/*" className="hidden" onChange={handleMainPhotoUpload} />
-              <div className="p-4 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
-                    <Upload className="w-6 h-6" />
-                  </div>
-                  <span className="text-slate-800 font-bold text-lg">Change Photo</span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Content */}
-          <div className="lg:col-span-7 order-2 lg:order-1 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-md border border-slate-100 mb-6 transform hover:-translate-y-1 transition-transform">
-              <Sparkles className="w-5 h-5 text-amber-500" />
-              <span className="text-sm font-bold tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">
-                Learning & Development Expert
-              </span>
+    <div id="portfolio-content" class="bg-slate-50 relative pb-10">
+        <!-- 1. HERO PRESENTATION SECTION -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 py-20 bg-white">
+            <!-- Cheerful Abstract Backgrounds -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none print-hide">
+                <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-pink-300/30 rounded-full blur-[100px]"></div>
+                <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-300/30 rounded-full blur-[120px]"></div>
+                <div class="absolute top-[20%] right-[10%] w-[300px] h-[300px] bg-yellow-300/30 rounded-full blur-[80px]"></div>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-extrabold text-slate-800 mb-4 tracking-tight leading-tight">
-              Prahoro Yudo <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Purwono</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl font-bold text-slate-500 mb-8">
-              S.M., S.S., M.Hum., C.T., CHRS.
-            </p>
-
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
-              <div className="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="p-2 bg-blue-100 rounded-xl text-blue-600"><Phone className="w-4 h-4" /></div>
-                <span className="font-medium">081615117369</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="p-2 bg-pink-100 rounded-xl text-pink-600"><Mail className="w-4 h-4" /></div>
-                <span className="font-medium break-all">prahoroyudopurwono@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                <div className="p-2 bg-emerald-100 rounded-xl text-emerald-600"><MapPin className="w-4 h-4" /></div>
-                <span className="font-medium">Kediri, Jawa Timur</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 2. CORE EXPERTISE SECTION (Replaced Objective) */}
-      <section className="px-6 py-16 bg-slate-50 relative">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center p-3 bg-purple-100 text-purple-600 rounded-2xl mb-6 shadow-sm transform -rotate-3 hover:rotate-0 transition-transform">
-            <Award className="w-8 h-8" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-10">Core Expertise & Skills</h2>
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            {skills.map((skill, index) => (
-              <span key={index} className="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. EXPERIENCE PRESENTATION SLIDES */}
-      <section className="px-6 py-24 bg-white overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Career Journey</h2>
-            <div className="w-24 h-1.5 bg-gradient-to-r from-pink-400 to-orange-400 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="space-y-32">
-            {experiences.map((exp, index) => (
-              <div key={index} className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center print-break-avoid`}>
+            <div class="max-w-6xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                {/* Photo Upload Section for the Job */}
-                <div className="w-full lg:w-1/2 relative group">
-                  {/* Colorful shadow blob */}
-                  <div className={`absolute -inset-4 bg-gradient-to-r ${exp.color} rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500`}></div>
-                  
-                  <div className={`relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-slate-50 border-4 border-white shadow-xl flex items-center justify-center ${!jobPhotos[index] && 'border-dashed border-slate-300'}`}>
-                    {jobPhotos[index] ? (
-                  <img src={jobPhotos[index]} alt={`${exp.company} Workspace`} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="text-center text-slate-400 print:hidden">
-                    <ImageIcon className={`w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r ${exp.color}`} />
-                    <span className="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Photo</span>
-                    <p className="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
-                  </div>
-                )}
-                
-                <label data-html2canvas-ignore="true" className="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print:hidden">
-                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleJobPhotoUpload(index, e)} />
-                  <div className={`p-4 bg-gradient-to-r ${exp.color} rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform`}>
-                        <Upload className="w-8 h-8" />
-                      </div>
-                      <span className="text-slate-800 font-bold">Change Work Photo</span>
-                    </label>
-                  </div>
+                <!-- Profile Photo Upload -->
+                <div class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
+                    <div class="relative group">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-pink-400 via-orange-300 to-yellow-400 rounded-[2.5rem] blur-lg opacity-60 group-hover:opacity-100 transition duration-500 print-hide"></div>
+                        
+                        <!-- Image Container -->
+                        <div id="main-photo-container" class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-[2rem] overflow-hidden bg-white border-4 border-dashed border-slate-300 shadow-2xl flex items-center justify-center">
+                            <!-- Placeholder -->
+                            <div class="text-center text-slate-400 print-hide">
+                                <i data-lucide="camera" class="w-12 h-12 mx-auto mb-3 opacity-60 text-pink-400"></i>
+                                <span class="font-bold text-sm tracking-widest uppercase text-slate-500">Upload Portrait</span>
+                            </div>
+                        </div>
+
+                        <!-- Upload Overlay -->
+                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide rounded-[2rem]">
+                            <input type="file" accept="image/*" class="hidden" id="main-photo-input" />
+                            <div class="p-4 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="upload" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-slate-800 font-bold text-lg">Change Photo</span>
+                        </label>
+                    </div>
                 </div>
 
-                {/* Job Description Presentation */}
-                <div className="w-full lg:w-1/2 text-left">
-                  <div className={`inline-block px-5 py-2 rounded-2xl bg-gradient-to-r ${exp.color} text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg ${exp.shadow}`}>
-                    {exp.period}
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight">{exp.title}</h3>
-                  <h4 className="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3">
-                    <div className="p-2 bg-slate-100 rounded-xl"><Briefcase className="w-5 h-5 text-slate-600" /></div>
-                    {exp.company}
-                  </h4>
-                  
-                  <ul className="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100">
-                    {exp.points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-4 text-slate-600 font-medium">
-                        <div className={`mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r ${exp.color} shrink-0 shadow-sm`}></div>
-                        <p className="text-lg leading-relaxed">{point}</p>
-                      </li>
-                    ))}
-                  </ul>
+                <!-- Hero Content -->
+                <div class="lg:col-span-7 order-2 lg:order-1 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-md border border-slate-100 mb-6 transform hover:-translate-y-1 transition-transform">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
+                        <span class="text-sm font-bold tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">
+                            Learning & Development Expert
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-slate-800 mb-4 tracking-tight leading-tight">
+                        Prahoro Yudo <br class="hidden md:block"/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Purwono</span>
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl font-bold text-slate-500 mb-8">
+                        S.M., S.S., M.Hum., C.T., CHRS.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
+                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="p-2 bg-blue-100 rounded-xl text-blue-600 print-hide"><i data-lucide="phone" class="w-4 h-4"></i></div>
+                            <span class="font-medium">081615117369</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="p-2 bg-pink-100 rounded-xl text-pink-600 print-hide"><i data-lucide="mail" class="w-4 h-4"></i></div>
+                            <span class="font-medium break-all">prahoroyudopurwono@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-700 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="p-2 bg-emerald-100 rounded-xl text-emerald-600 print-hide"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
+                            <span class="font-medium">Kediri, Jawa Timur</span>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+        </section>
+
+        <!-- 2. CORE EXPERTISE SECTION -->
+        <section class="px-6 py-16 bg-slate-50 relative print-break-avoid">
+            <div class="max-w-5xl mx-auto text-center">
+                <div class="inline-flex items-center justify-center p-3 bg-purple-100 text-purple-600 rounded-2xl mb-6 shadow-sm transform -rotate-3 hover:rotate-0 transition-transform">
+                    <i data-lucide="award" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-10">Core Expertise & Skills</h2>
                 
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. DIGITAL PRESENCE (TIKTOK & IG) */}
-      <section className="px-6 py-24 bg-gradient-to-b from-sky-50 to-indigo-50 border-y border-slate-200">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 text-center md:text-left">
-            <div>
-              <h2 className="text-4xl font-extrabold text-slate-800 mb-4">Digital Presence</h2>
-              <p className="text-slate-500 text-lg font-medium">My creative portfolio and professional branding across platforms.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Learning Strategy Design</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Instructional Design</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Curriculum Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Talent Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Program Evaluation & ROI</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Data Analysis (Excel)</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Data-Driven Decision</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">People Development</span>
+                    <span class="px-6 py-3 bg-white text-slate-700 rounded-2xl text-base font-bold shadow-sm border border-slate-200 hover:border-pink-300 hover:shadow-md hover:-translate-y-1 transition-all cursor-default text-center">Training Management</span>
+                </div>
             </div>
-            <div className="mt-6 md:mt-0 flex justify-center md:justify-start gap-3">
-              <div className="w-12 h-2 bg-pink-400 rounded-full"></div>
-              <div className="w-12 h-2 bg-purple-400 rounded-full"></div>
-              <div className="w-12 h-2 bg-blue-400 rounded-full"></div>
+        </section>
+
+        <!-- 3. EXPERIENCE PRESENTATION SLIDES -->
+        <section class="px-6 py-24 bg-white overflow-hidden">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Career Journey</h2>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-pink-400 to-orange-400 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="space-y-32">
+                    
+                    <!-- EXP 1 -->
+                    <div class="flex flex-col lg:flex-row gap-12 items-center print-break-avoid">
+                        <div class="w-full lg:w-1/2 relative group">
+                            <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 to-rose-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
+                            <div id="job-photo-container-1" class="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center">
+                                <div class="text-center text-slate-400 print-hide">
+                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400"></i>
+                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Photo</span>
+                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
+                                </div>
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-3xl">
+                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-1" />
+                                <div class="p-4 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload" class="w-8 h-8"></i>
+                                </div>
+                                <span class="text-slate-800 font-bold">Change Work Photo</span>
+                            </label>
+                        </div>
+                        <div class="w-full lg:w-1/2 text-left">
+                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-pink-200">
+                                2025 - Present
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight">Trainer of Data Analysis & Public Speaking</h3>
+                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3">
+                                <div class="p-2 bg-slate-100 rounded-xl"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
+                                PT Yureka Edukasi Cipta
+                            </h4>
+                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100">
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Delivered training sessions on data analysis using Microsoft Excel (formulas, pivot tables, data visualization, and basic data processing).</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Designed practical, hands-on training materials and case studies to improve participants analytical and problem-solving skills.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Conducted public speaking and presentation skills training to enhance communication, confidence, and audience engagement.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- EXP 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse gap-12 items-center print-break-avoid">
+                        <div class="w-full lg:w-1/2 relative group">
+                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
+                            <div id="job-photo-container-2" class="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center">
+                                <div class="text-center text-slate-400 print-hide">
+                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400"></i>
+                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Photo</span>
+                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
+                                </div>
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-3xl">
+                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-2" />
+                                <div class="p-4 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload" class="w-8 h-8"></i>
+                                </div>
+                                <span class="text-slate-800 font-bold">Change Work Photo</span>
+                            </label>
+                        </div>
+                        <div class="w-full lg:w-1/2 text-left">
+                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-blue-200">
+                                2021 - Present
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight">Learning and Development Lead</h3>
+                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3">
+                                <div class="p-2 bg-slate-100 rounded-xl"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
+                                PT Yureka Edukasi Cipta
+                            </h4>
+                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100">
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Developed and executed annual L&D plans based on Training Needs Analysis (TNA) across all departments.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Designed training curricula and modules (hard skills & soft skills), including syllabus, learning materials, and evaluation methods.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Designed and implemented people development programs such as IDP, competency mapping, and talent & succession programs.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Evaluated training effectiveness through participant feedback, assessments, and KPI analysis.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- EXP 3 -->
+                    <div class="flex flex-col lg:flex-row gap-12 items-center print-break-avoid">
+                        <div class="w-full lg:w-1/2 relative group">
+                            <div class="absolute -inset-4 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
+                            <div id="job-photo-container-3" class="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center">
+                                <div class="text-center text-slate-400 print-hide">
+                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400"></i>
+                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Photo</span>
+                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
+                                </div>
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-3xl">
+                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-3" />
+                                <div class="p-4 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload" class="w-8 h-8"></i>
+                                </div>
+                                <span class="text-slate-800 font-bold">Change Work Photo</span>
+                            </label>
+                        </div>
+                        <div class="w-full lg:w-1/2 text-left">
+                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-emerald-200">
+                                2021
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight">Bartender and Sales Support Staff</h3>
+                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3">
+                                <div class="p-2 bg-slate-100 rounded-xl"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
+                                PT Esteh Indonesia Makmur
+                            </h4>
+                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100">
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Managed day-to-day beverage preparation ensuring quality and consistency according to standard operating procedures.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Supported sales initiatives and customer service excellence to achieve daily store targets.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Maintained inventory and operational cleanliness, contributing to a highly efficient retail environment.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- EXP 4 -->
+                    <div class="flex flex-col lg:flex-row-reverse gap-12 items-center print-break-avoid">
+                        <div class="w-full lg:w-1/2 relative group">
+                            <div class="absolute -inset-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500 print-hide"></div>
+                            <div id="job-photo-container-4" class="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-slate-50 border-4 border-dashed border-slate-300 shadow-xl flex items-center justify-center">
+                                <div class="text-center text-slate-400 print-hide">
+                                    <i data-lucide="image" class="w-16 h-16 mx-auto mb-4 opacity-50 bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400"></i>
+                                    <span class="font-bold tracking-wide uppercase text-sm text-slate-500">Upload Photo</span>
+                                    <p class="text-xs mt-2 text-slate-400 font-medium">Showcase your activity here</p>
+                                </div>
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm print-hide rounded-3xl">
+                                <input type="file" accept="image/*" class="hidden" id="job-photo-input-4" />
+                                <div class="p-4 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full mb-3 shadow-lg text-white transform group-hover:scale-110 transition-transform">
+                                    <i data-lucide="upload" class="w-8 h-8"></i>
+                                </div>
+                                <span class="text-slate-800 font-bold">Change Work Photo</span>
+                            </label>
+                        </div>
+                        <div class="w-full lg:w-1/2 text-left">
+                            <div class="inline-block px-5 py-2 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white text-sm font-bold tracking-widest uppercase mb-6 shadow-lg shadow-amber-200">
+                                2020 - 2021
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 leading-tight">Copywriter & UX Writer Lead</h3>
+                            <h4 class="text-xl text-slate-500 font-bold mb-8 flex items-center gap-3">
+                                <div class="p-2 bg-slate-100 rounded-xl"><i data-lucide="briefcase" class="w-5 h-5 text-slate-600"></i></div>
+                                Conecworld Group
+                            </h4>
+                            <ul class="space-y-4 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100">
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Led copywriting initiatives for marketing campaigns, ensuring brand voice consistency across all digital channels.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Designed and optimized UX copy for digital products, improving user navigation and overall digital experience.</p>
+                                </li>
+                                <li class="flex items-start gap-4 text-slate-600 font-medium">
+                                    <div class="mt-2 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 shrink-0 shadow-sm print-hide"></div>
+                                    <p class="text-lg leading-relaxed">Collaborated with design and product teams to create compelling narratives that drive user engagement and conversions.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
+        </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            
-            {/* TikTok Landscape Card */}
-            <div className="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300 print-break-avoid">
-              <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full shadow-lg">
-                <PlaySquare className="w-5 h-5" />
-                <span className="font-bold text-sm tracking-wide">TikTok Highlights</span>
-              </div>
-              
-              <div className="aspect-video w-full relative bg-slate-50 flex items-center justify-center">
-                {socialPhotos.tiktok ? (
-                  <img src={socialPhotos.tiktok} alt="TikTok Portfolio" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                ) : (
-                  <div className="text-center text-slate-400 print:hidden">
-                    <ImageIcon className="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500" />
-                    <span className="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
-                  </div>
-                )}
+        <!-- 4. DIGITAL PRESENCE (TIKTOK & IG) -->
+        <section class="px-6 py-24 bg-gradient-to-b from-sky-50 to-indigo-50 border-y border-slate-200 print-break-avoid">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 text-center md:text-left">
+                    <div>
+                        <h2 class="text-4xl font-extrabold text-slate-800 mb-4">Digital Presence</h2>
+                        <p class="text-slate-500 text-lg font-medium">My creative portfolio and professional branding across platforms.</p>
+                    </div>
+                    <div class="mt-6 md:mt-0 flex justify-center md:justify-start gap-3 print-hide">
+                        <div class="w-12 h-2 bg-pink-400 rounded-full"></div>
+                        <div class="w-12 h-2 bg-purple-400 rounded-full"></div>
+                        <div class="w-12 h-2 bg-blue-400 rounded-full"></div>
+                    </div>
+                </div>
 
-                <label data-html2canvas-ignore="true" className="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print:hidden">
-                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleSocialPhotoUpload('tiktok', e)} />
-                  <div className="p-4 bg-black rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <span className="text-slate-800 font-extrabold text-lg">Upload TikTok Preview</span>
-                </label>
-              </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- TikTok Landscape Card -->
+                    <div class="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300">
+                        <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full shadow-lg">
+                            <i data-lucide="play-square" class="w-5 h-5"></i>
+                            <span class="font-bold text-sm tracking-wide">TikTok Highlights</span>
+                        </div>
+                        
+                        <div id="tiktok-photo-container" class="aspect-video w-full relative bg-slate-50 flex items-center justify-center border-4 border-white">
+                            <div class="text-center text-slate-400 print-hide">
+                                <i data-lucide="image" class="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500"></i>
+                                <span class="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
+                            </div>
+                        </div>
+
+                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide">
+                            <input type="file" accept="image/*" class="hidden" id="tiktok-photo-input" />
+                            <div class="p-4 bg-black rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="upload" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-slate-800 font-extrabold text-lg">Upload TikTok Preview</span>
+                        </label>
+                    </div>
+
+                    <!-- Instagram Landscape Card -->
+                    <div class="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300">
+                        <div class="absolute top-6 left-6 z-20 flex items-center gap-2 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white px-5 py-2.5 rounded-full shadow-lg">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                            <span class="font-bold text-sm tracking-wide">Instagram Portfolio</span>
+                        </div>
+                        
+                        <div id="ig-photo-container" class="aspect-video w-full relative bg-slate-50 flex items-center justify-center border-4 border-white">
+                            <div class="text-center text-slate-400 print-hide">
+                                <i data-lucide="image" class="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500"></i>
+                                <span class="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
+                            </div>
+                        </div>
+
+                        <label class="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print-hide">
+                            <input type="file" accept="image/*" class="hidden" id="ig-photo-input" />
+                            <div class="p-4 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="upload" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-slate-800 font-extrabold text-lg">Upload IG Preview</span>
+                        </label>
+                    </div>
+
+                </div>
             </div>
+        </section>
 
-            {/* Instagram Landscape Card */}
-            <div className="group relative rounded-[2.5rem] overflow-hidden bg-white shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-all duration-300 print-break-avoid">
-              <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white px-5 py-2.5 rounded-full shadow-lg">
-                <Instagram className="w-5 h-5" />
-                <span className="font-bold text-sm tracking-wide">Instagram Portfolio</span>
-              </div>
-              
-              <div className="aspect-video w-full relative bg-slate-50 flex items-center justify-center">
-                {socialPhotos.instagram ? (
-                  <img src={socialPhotos.instagram} alt="Instagram Portfolio" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                ) : (
-                  <div className="text-center text-slate-400 print:hidden">
-                    <ImageIcon className="w-12 h-12 mx-auto mb-3 opacity-40 text-slate-500" />
-                    <span className="font-bold text-sm uppercase tracking-wide">Upload Landscape Image (16:9)</span>
-                  </div>
-                )}
+        <!-- 5. EDUCATION & CERTIFICATIONS -->
+        <section class="px-6 py-24 bg-white relative print-break-avoid">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Education -->
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-10 md:p-12 rounded-[2.5rem] border border-orange-100 shadow-xl shadow-orange-100/50 hover:shadow-2xl hover:shadow-orange-200/50 transition-shadow">
+                    <div class="w-16 h-16 bg-orange-400 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-200 transform -rotate-3">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-8">Education</h2>
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-orange-50">
+                        <h3 class="text-2xl font-bold text-slate-800">Master of Applied Linguistic</h3>
+                        <p class="text-lg text-orange-500 font-bold mt-2 mb-6">Universitas Indonesia</p>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 rounded-xl text-orange-700 font-bold text-lg">
+                            <span class="text-orange-500/80 text-sm uppercase tracking-wide">Final GPA</span> 
+                            3.73
+                        </div>
+                    </div>
+                </div>
 
-                <label data-html2canvas-ignore="true" className="absolute inset-0 cursor-pointer bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center backdrop-blur-sm z-10 print:hidden">
-                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleSocialPhotoUpload('instagram', e)} />
-                  <div className="p-4 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-full mb-3 shadow-xl text-white transform group-hover:scale-110 transition-transform">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <span className="text-slate-800 font-extrabold text-lg">Upload IG Preview</span>
-                </label>
-              </div>
+                <!-- Certifications -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-10 md:p-12 rounded-[2.5rem] border border-purple-100 shadow-xl shadow-purple-100/50 hover:shadow-2xl hover:shadow-purple-200/50 transition-shadow">
+                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-purple-200 transform rotate-3">
+                        <i data-lucide="award" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-8">Certifications <span class="text-purple-400 text-xl">(2025)</span></h2>
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
+                            <span class="text-lg font-bold text-slate-700">Certified Trainer KKNI Level 4</span>
+                            <span class="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">BNSP</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
+                            <span class="text-lg font-bold text-slate-700">Certified HR Supervisor</span>
+                            <span class="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">BNSP</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
+                            <span class="text-lg font-bold text-slate-700">TOEFL ITP Official</span>
+                            <span class="text-sm font-extrabold text-pink-600 bg-pink-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">Score: 537</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        </section>
 
-          </div>
-        </div>
-      </section>
-
-      {/* 5. EDUCATION & CERTIFICATIONS */}
-      <section className="px-6 py-24 bg-white relative">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-10 md:p-12 rounded-[2.5rem] border border-orange-100 shadow-xl shadow-orange-100/50 hover:shadow-2xl hover:shadow-orange-200/50 transition-shadow print-break-avoid">
-            <div className="w-16 h-16 bg-orange-400 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-orange-200 transform -rotate-3">
-              <GraduationCap className="w-8 h-8 text-white" />
-            </div>
-            <h2 className="text-3xl font-extrabold text-slate-800 mb-8">Education</h2>
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-orange-50">
-              <h3 className="text-2xl font-bold text-slate-800">Master of Applied Linguistic</h3>
-              <p className="text-lg text-orange-500 font-bold mt-2 mb-6">Universitas Indonesia</p>
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-100 rounded-xl text-orange-700 font-bold text-lg">
-                <span className="text-orange-500/80 text-sm uppercase tracking-wide">Final GPA</span> 
-                3.73
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-10 md:p-12 rounded-[2.5rem] border border-purple-100 shadow-xl shadow-purple-100/50 hover:shadow-2xl hover:shadow-purple-200/50 transition-shadow print-break-avoid">
-            <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-purple-200 transform rotate-3">
-              <Award className="w-8 h-8 text-white" />
-            </div>
-            <h2 className="text-3xl font-extrabold text-slate-800 mb-8">Certifications <span className="text-purple-400 text-xl">(2025)</span></h2>
-            <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
-                <span className="text-lg font-bold text-slate-700">Certified Trainer KKNI Level 4</span>
-                <span className="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">BNSP</span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
-                <span className="text-lg font-bold text-slate-700">Certified HR Supervisor</span>
-                <span className="text-sm font-extrabold text-purple-600 bg-purple-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">BNSP</span>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-purple-50 gap-3">
-                <span className="text-lg font-bold text-slate-700">TOEFL ITP Official</span>
-                <span className="text-sm font-extrabold text-pink-600 bg-pink-100 px-4 py-1.5 rounded-xl self-start sm:self-auto">Score: 537</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="py-12 text-center border-t border-slate-200 bg-slate-50 print:hidden">
-        <p className="text-slate-500 font-medium">© 2026 Prahoro Yudo Purwono. Interactive Portfolio.</p>
-      </footer>
+        <!-- FOOTER -->
+        <footer class="py-12 text-center border-t border-slate-200 bg-slate-50 print-hide">
+            <p class="text-slate-500 font-medium">© 2026 Prahoro Yudo Purwono. Interactive Portfolio.</p>
+        </footer>
     </div>
 
-    {/* FLOATING DOWNLOAD BUTTON */}
-    <button 
-      onClick={handleDownloadPDF}
-      disabled={isGenerating}
-      className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-gradient-to-r from-slate-800 to-slate-900 text-white px-6 py-4 rounded-full shadow-2xl transition-all duration-300 group print:hidden ${isGenerating ? 'opacity-80 cursor-not-allowed' : 'hover:scale-105 hover:shadow-pink-500/30'}`}
-    >
-      {isGenerating ? (
-        <Loader2 className="w-5 h-5 animate-spin" />
-      ) : (
-        <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-      )}
-      <span className="font-bold tracking-wide">{isGenerating ? 'Menyimpan PDF...' : 'Download PDF'}</span>
+    <!-- FLOATING DOWNLOAD BUTTON -->
+    <button onclick="window.print()" class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-gradient-to-r from-slate-800 to-slate-900 text-white px-6 py-4 rounded-full shadow-2xl transition-all duration-300 group hover:scale-105 hover:shadow-pink-500/30 print-hide">
+        <i data-lucide="printer" class="w-5 h-5 group-hover:-translate-y-1 transition-transform"></i>
+        <span class="font-bold tracking-wide">Cetak PDF</span>
     </button>
 
-  </div>
-  );
-}
+    <!-- Script to Handle File Uploads & Initialize Icons -->
+    <script>
+        // Inisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // Fungsi Universal untuk menangani preview gambar
+        function setupImageUpload(inputId, containerId) {
+            const input = document.getElementById(inputId);
+            const container = document.getElementById(containerId);
+
+            if (input && container) {
+                input.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            // Mengganti isi container langsung dengan elemen gambar (image cover)
+                            container.innerHTML = `<img src="${e.target.result}" alt="Uploaded Photo" class="w-full h-full object-cover rounded-[inherit]" />`;
+                            // Hapus style border dashed jika ada
+                            container.classList.remove('border-dashed', 'border-slate-300');
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        }
+
+        // Jalankan fungsi untuk setiap input file yang ada
+        setupImageUpload('main-photo-input', 'main-photo-container');
+        setupImageUpload('job-photo-input-1', 'job-photo-container-1');
+        setupImageUpload('job-photo-input-2', 'job-photo-container-2');
+        setupImageUpload('job-photo-input-3', 'job-photo-container-3');
+        setupImageUpload('job-photo-input-4', 'job-photo-container-4');
+        setupImageUpload('tiktok-photo-input', 'tiktok-photo-container');
+        setupImageUpload('ig-photo-input', 'ig-photo-container');
+    </script>
+
+</body>
+</html>
